@@ -23,8 +23,11 @@ let user ={
 console.log(user);
 delete user.Email;
 console.log(user);
+<<<<<<< HEAD
 user.phone = "+56 9 12345678";
 console.log(user);
+=======
+>>>>>>> f053acb8c6cbfe5954d96655079967f7dc1b40d7
 
 console.log(typeof edad);
 edad = String(edad)
