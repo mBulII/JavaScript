@@ -4,6 +4,9 @@ const PI = 3.14;
 
 const bigInt = 23985752098304982307402938429075n;
 console.log(bigInt);
+const x = 1000000;
+const n_grande = 1e6;
+
 
 let V = true;
 let F = false;
@@ -23,11 +26,8 @@ let user ={
 console.log(user);
 delete user.Email;
 console.log(user);
-<<<<<<< HEAD
 user.phone = "+56 9 12345678";
 console.log(user);
-=======
->>>>>>> f053acb8c6cbfe5954d96655079967f7dc1b40d7
 
 console.log(typeof edad);
 edad = String(edad)

@@ -1,5 +1,5 @@
-let nombre = "Andres"
-let apellido = "Alberto"
+let nombre = "Andres";
+let apellido = "Alberto";
 
 var edad 
 let ciudad
