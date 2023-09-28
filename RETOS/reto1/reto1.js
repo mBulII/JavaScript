@@ -1,9 +1,9 @@
-let numero = prompt("Ingresa un numero entero");
+let number = prompt("Ingresa un numero entero");
 
-if (isNaN(numero) || numero < 0){
+if (isNaN(number) || number < 0){
     alert("caracter invalido, ingresa un entero positivo");
-} else if (numero % 2 == 0){
-    alert(`el numero ${numero} es par`);
+} else if (number % 2 == 0){
+    alert(`el numero ${number} es par`);
 } else{
-    alert(`el numero ${numero} es impar`);
+    alert(`el numero ${number} es impar`);
 }
