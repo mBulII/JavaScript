@@ -1,6 +1,6 @@
 function calculateBMI(){
-    let height = prompt("Ingresa tu altura en metros para calcular tu indice de masa corporal", 0);
-    let weight = prompt("Ingresa tu peso en kilogramos para calcular tu indice de masa corporal", 0);
+    let height = prompt("Ingresa tu altura en metros para calcular tu indice de masa corporal", 0).replace(",",".");
+    let weight = prompt("Ingresa tu peso en kilogramos para calcular tu indice de masa corporal", 0).replace(",",".");
 
     let BMI = weight/(height * height);
 
