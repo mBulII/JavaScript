@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reto3.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <h1 class="title">Calculadora de propina</h1>
+        <form>
+            <div class="input">
+                <label for="total">Total de la boleta:</label>
+                <input type="number" id="total" min="0">
+            </div>
+            <div class="percentage">Porcentaje de propina
+                <select id="tip">
+                    <option value="0%">0%</option>
+                    <option value="10%">10%</option>
+                    <option value="15%">15%</option>
+                    <option value="20%">20%</option>
+                    <option value="25%">25%</option>
+                    <option value="30%">30%</option>
+                </select>
+            </div>
+            <br>
+            <button id="calculate">Calcular</button>
+        </form>
+        <div id="results">
+            <p>Propina: <span id="tipAmount"></span></p>
+            <p>Total a pagar: <span id="totalAmount"></span></p>
+        </div>
+    </div>
+
+<script src="reto3.js" type="module"></script>
+</body>
+</html>
