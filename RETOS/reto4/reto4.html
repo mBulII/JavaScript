@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reto4.css">
+    <title>Reto 4</title>
+</head>
+<body>
+    <div class="box">
+        <h1 class="title">Calculadora de IMC</h1>
+
+        <div class="input">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name">
+        </div>
+        <div class="input">
+            <label for="weight">Peso (kilogramos):</label>
+            <input type="number" id="weight" min="0">
+        </div>
+        <div class="input">
+            <label for="height">Altura (metros):</label>
+            <input type="number" id="height" min="0">
+        </div>
+        <div class="input">
+            <label for="age">Edad:</label>
+            <input type="number" id="age" min="0">
+        </div>
+        <div class="input">Genero:
+            <select id="gender">
+                <option value="1">Masculino</option>
+                <option value="1">Femenino</option>
+            </select>
+        </div>
+        <div class="input">Actividad fisica:
+            <select id="physicalActivity">
+                <option value="1.2">Sedentario</option>
+                <option value="1.55">Moderado</option>
+                <option value="1.9">Activo</option>
+            </select>
+        </div>
+
+        <br>
+        <button id="calculate">Calcular</button>
+
+        <div id="results">
+            <h1>Resultados para <span id="patientName"></span></h1>
+            <p>IMC: <span id="bmiResult"></span></p>
+            <p>Clasificacion: <span id="classification"></span></p>
+            <p>Gasto energetico diario: <span id="energy"></span></p>
+            <p>Estado nutricional: <span id="nutritionalState"></span></p>
+        </div>
+    </div>
+
+<script src="reto4.js" type="module"></script>
+</body>
+</html>
