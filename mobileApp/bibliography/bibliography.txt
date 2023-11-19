@@ -1,0 +1,49 @@
+EXPO or React CLI?
+https://medium.com/@softworthsolutionspvtltd/expo-vs-react-native-cli-7e47c7630039
+
+react native EXPO
+https://reactnative.dev/docs/environment-setup?guide=quickstart
+
+react navigation
+https://reactnavigation.org/docs/getting-started
+
+react native vector icons
+https://www.npmjs.com/package/react-native-vector-icons
+https://oblador.github.io/react-native-vector-icons/
+
+react native snap carousel
+https://www.npmjs.com/package/react-native-snap-carousel
+
+expo linear gradient
+https://www.npmjs.com/package/expo-linear-gradient
+
+react native progress
+https://www.npmjs.com/package/react-native-progress
+
+axios
+https://www.npmjs.com/package/axios
+
+
+npm installed packages:
+@babel/core
+expo-status-bar
+expo 
+react-native
+react
+@react-navigation/native
+@react-navigation/native-stack
+react-native-screens
+react-native-safe-area-context
+react-native-vector-icons
+react-native-snap-carousel
+expo-linear-gradient
+react-native-progress
+axios
+
+
+color pallette:
+main: #2C3A4F
+secondary: #56647b
+terciary: #b4c2dc
+alerts, icons: #FF4D4D
+text: #fff
