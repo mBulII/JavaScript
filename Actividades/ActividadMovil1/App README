@@ -1,0 +1,4 @@
+es una aplicacion creada con react native expo, para ejecutarla es necesario estar dentro de la carpeta 'ActividadMovil1' y utilizar el comando:
+npm start
+
+luego escanear el codigo qr con la aplicacion 'expo go' en android o con un scaner de qr para IOS
