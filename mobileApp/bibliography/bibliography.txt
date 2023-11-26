@@ -17,8 +17,8 @@ https://www.npmjs.com/package/react-native-snap-carousel
 expo linear gradient
 https://www.npmjs.com/package/expo-linear-gradient
 
-react native progress
-https://www.npmjs.com/package/react-native-progress
+react navigation drawer
+https://reactnavigation.org/docs/drawer-navigator
 
 axios
 https://www.npmjs.com/package/axios
@@ -27,17 +27,22 @@ https://www.npmjs.com/package/axios
 npm installed packages:
 @babel/core
 expo-status-bar
+expo-linear-gradient
 expo 
 react-native
 react
+deprecated-react-native-prop-types
+@react-native-community/blur
 @react-navigation/native
 @react-navigation/native-stack
+react-native-linear-gradient
 react-native-screens
 react-native-safe-area-context
 react-native-vector-icons
 react-native-snap-carousel
-expo-linear-gradient
-react-native-progress
+@react-navigation/drawer
+react-native-gesture-handler 
+react-native-reanimated
 axios
 
 

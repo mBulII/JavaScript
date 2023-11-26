@@ -5,16 +5,17 @@ var { width, height } = Dimensions.get("window");
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 75,
+    backgroundColor: "#b4c2dc",
   },
-  text: {
-    color: "#fff",
-    fontSize: 20,
-    marginBottom: 25,
+  logoContainer: {
+    padding: 20,
   },
-  thumbnail: {
-    width: width * 0.4,
-    height: height * 0.3,
-    borderRadius: 10,
+  logo: {
+    width: width * 0.3,
+    height: height * 0.2,
+  },
+  sideBarItem: {
+    fontSize: 18,
+    marginBottom: 10,
   },
 });
