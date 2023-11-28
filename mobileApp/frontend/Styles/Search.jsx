@@ -35,6 +35,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: "#fff",
     letterSpacing: 1,
+    height: 50,
   },
   iconContainer: {
     padding: 10,

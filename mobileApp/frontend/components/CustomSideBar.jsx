@@ -6,6 +6,8 @@ import {
 } from "@react-navigation/drawer";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Home from "../containers/Home";
+import Login from "../containers/Login";
+import SignUp from "../containers/SignUp";
 
 import { styles } from "../Styles/CustomSideBar";
 import Icons from "react-native-vector-icons/FontAwesome";
@@ -50,7 +52,7 @@ export default function SideBar() {
       />
       <Drawer.Screen
         name="Login"
-        component={Home}
+        component={Login}
         options={{
           drawerIcon: ({ color }) => (
             <Icons
@@ -63,8 +65,8 @@ export default function SideBar() {
         }}
       />
       <Drawer.Screen
-        name="Sign Up"
-        component={Home}
+        name="Register"
+        component={SignUp}
         options={{
           drawerIcon: ({ color }) => (
             <Icons
