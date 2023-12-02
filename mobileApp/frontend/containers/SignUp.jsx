@@ -8,6 +8,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   ScrollView,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -15,8 +16,92 @@ import { useNavigation } from "@react-navigation/native";
 import { styles } from "../Styles/SignUp";
 import Icons from "react-native-vector-icons/FontAwesome";
 
+import {
+  getAuth,
+  initializeAuth,
+  getReactNativePersistence,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+} from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
+import { initializeApp, getApp, getApps } from "firebase/app";
+import { firebaseConfig } from "../config/firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function SignUp() {
   const navigation = useNavigation();
+  const [formData, setFormData] = React.useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const onChangeText = (name, text) =>
+    setFormData({ ...formData, [name]: text });
+
+  const onSubmit = () => {
+    if (formData.password === formData.confirmPassword) {
+      handleCreateAccount();
+    }
+  };
+  const [feedbackMessage, setFeedbackMessage] = React.useState("");
+  const onTouch = () => {
+    setFeedbackMessage("");
+  };
+
+  let app, auth;
+  if (!getApps().length) {
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = initializeAuth(app, {
+        persistence: getReactNativePersistence(AsyncStorage),
+      });
+    } catch (error) {
+      console.log("Error initializing app: " + error);
+      setFeedbackMessage("Error, try again later.");
+    }
+  } else {
+    app = getApp();
+    auth = getAuth(app);
+  }
+
+  const handleCreateAccount = () => {
+    createUserWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        sendEmailVerification(user)
+          .then(() => {
+            setFeedbackMessage(
+              "Verification email sent. Please check your inbox."
+            );
+          })
+          .catch((verificationError) => {
+            console.log(verificationError);
+            setFeedbackMessage(
+              "Error sending verification email. Please try again."
+            );
+          });
+
+        updateProfile(user, { displayName: formData.username })
+          .then(() => {
+            const db = getDatabase();
+            const userRef = ref(db, `users/${user.uid}`);
+            set(userRef, {
+              username: formData.username,
+              email: formData.email,
+            });
+          })
+          .catch((updateProfileError) => {
+            console.log(updateProfileError);
+            Alert.alert(updateProfileError.message);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(error.message);
+      });
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -50,6 +135,8 @@ export default function SignUp() {
                 style={styles.input}
                 placeholder="Username"
                 placeholderTextColor="#CCCCCC"
+                name="username"
+                onChangeText={(text) => onChangeText("username", text)}
               />
             </View>
             <Text style={styles.labelText}>Email</Text>
@@ -59,6 +146,8 @@ export default function SignUp() {
                 style={styles.input}
                 placeholder="Email"
                 placeholderTextColor="#CCCCCC"
+                name="email"
+                onChangeText={(text) => onChangeText("email", text)}
               />
             </View>
             <Text style={styles.labelText}>Password</Text>
@@ -69,6 +158,8 @@ export default function SignUp() {
                 placeholder="Password"
                 placeholderTextColor="#CCCCCC"
                 secureTextEntry={true}
+                name="password"
+                onChangeText={(text) => onChangeText("password", text)}
               />
             </View>
             <Text style={styles.labelText}>Confirm Password</Text>
@@ -79,9 +170,11 @@ export default function SignUp() {
                 placeholder="Confirm Password"
                 placeholderTextColor="#CCCCCC"
                 secureTextEntry={true}
+                name="confirmPassword"
+                onChangeText={(text) => onChangeText("confirmPassword", text)}
               />
             </View>
-            <TouchableOpacity style={styles.SignUpBtn}>
+            <TouchableOpacity style={styles.SignUpBtn} onPress={onSubmit}>
               <Text style={styles.SignUpText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
@@ -113,6 +206,14 @@ export default function SignUp() {
             </TouchableOpacity>
           </View>
         </View>
+        {feedbackMessage ? (
+          <View style={styles.feedbackContainer}>
+            <Text style={styles.feedbackText}>{feedbackMessage}</Text>
+            <TouchableOpacity onPress={onTouch}>
+              <Text style={styles.feedBackClose}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        ) : null}
       </ScrollView>
     </TouchableWithoutFeedback>
   );

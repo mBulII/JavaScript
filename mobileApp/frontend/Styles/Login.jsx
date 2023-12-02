@@ -123,4 +123,29 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FF4D4D",
   },
+
+  feedbackContainer: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: [{ translateX: width * -0.5 }, { translateY: height * -0.13 }],
+    backgroundColor: "#b4c2dc",
+    borderRadius: 20,
+    height: 250,
+    width: width,
+    paddingTop: 100,
+  },
+  feedbackText: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    paddingBottom: 40,
+  },
+  feedBackClose: {
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "#FF4D4D",
+    textAlign: "center",
+  },
 });
