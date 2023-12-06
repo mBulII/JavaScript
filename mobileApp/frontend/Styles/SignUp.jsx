@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#56647b",
     color: "#fff",
     borderRadius: 20,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   inputIcon: {
     fontSize: 20,
@@ -68,10 +68,18 @@ export const styles = StyleSheet.create({
     left: 10,
     top: 18,
   },
+  errorText: {
+    color: "#FF4D4D",
+    alignSelf: "stretch",
+    marginLeft: 15,
+    marginBottom: 10,
+  },
+
   SignUpBtn: {
     backgroundColor: "#FF4D4D",
     paddingVertical: 10,
     borderRadius: 20,
+    marginTop: 30,
   },
   SignUpText: {
     fontWeight: "bold",

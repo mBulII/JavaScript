@@ -23,6 +23,11 @@
         "backgroundColor": "#b4c2dc"
       }
     },
+    "androidNavigationBar": {
+     "visible": true,
+     "barStyle": "light-content",
+     "backgroundColor": "#2C3A4F"
+   },
     "web": {
       "favicon": "./assets/favicon.png"
     }

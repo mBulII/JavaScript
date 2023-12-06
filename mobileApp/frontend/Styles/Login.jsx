@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#56647b",
     color: "#fff",
     borderRadius: 20,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   inputIcon: {
     fontSize: 20,
@@ -68,12 +68,20 @@ export const styles = StyleSheet.create({
     left: 10,
     top: 18,
   },
+  errorText: {
+    color: "#FF4D4D",
+    alignSelf: "stretch",
+    marginLeft: 15,
+    marginBottom: 15,
+  },
+
   forgotContainer: {
+    marginTop: 20,
     marginBottom: 30,
-    alignItems: "flex-end",
   },
   forgotText: {
     color: "#fff",
+    alignSelf: "flex-end",
   },
   loginBtn: {
     backgroundColor: "#FF4D4D",
@@ -90,13 +98,12 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     color: "#fff",
-    marginTop: 30,
+    marginVertical: 31,
   },
   otherOptions: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 80,
-    marginTop: 30,
   },
   otherOptionsContainer: {
     padding: 10,
@@ -133,19 +140,24 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     height: 250,
     width: width,
-    paddingTop: 100,
+    paddingTop: 80,
   },
   feedbackText: {
     fontSize: 30,
     fontWeight: "bold",
     color: "#fff",
     textAlign: "center",
-    paddingBottom: 40,
+    paddingBottom: 20,
   },
   feedBackClose: {
     fontSize: 30,
     fontWeight: "bold",
     color: "#FF4D4D",
     textAlign: "center",
+  },
+  feedBackSignUp: {
+    fontSize: 20,
+    color: "#FF4D4D",
+    fontWeight: "bold",
   },
 });
