@@ -55,15 +55,21 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     flexWrap: "wrap",
+    alignItems: "center",
+  },
+  thumbnailContainer: {
+    marginBottom: 40,
   },
   thumbnail: {
-    width: width * 0.44,
+    width: width * 0.4,
     height: height * 0.3,
     borderRadius: 15,
   },
-  thumbnailContainer: {
-    marginBottom: 60,
+  text: {
+    fontSize: 20,
+    color: "#fff",
   },
+
   defaultContainer: {
     alignItems: "center",
     marginTop: 100,

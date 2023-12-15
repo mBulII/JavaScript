@@ -1,20 +1,59 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import Loading from "../components/Loading";
+import { fetchGame } from "../api/database";
 
 import { styles } from "../Styles/GameScreen";
 import Icons from "react-native-vector-icons/FontAwesome";
 
 export default function GameScreen() {
-  let gameName = "God Of War";
-
-  const { params: item } = useRoute();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
-  useEffect(() => {}, [item]);
+  const { params: item } = useRoute();
+
+  useEffect(() => {
+    setLoading(true);
+    loadGame(item.id);
+  }, [item]);
+  const loadGame = async (id) => {
+    const data = await fetchGame(id);
+    if (data) setGame(data);
+    setLoading(false);
+  };
+  const [game, setGame] = useState({
+    developers: [],
+    publishers: [],
+    description: "",
+    genres: [],
+    parent_platforms: [],
+  });
+
+  const score = parseInt(game.metacritic);
+  let getMetacriticText;
+  if (score >= 90 && score <= 100) {
+    getMetacriticText = "Universal acclaim";
+  } else if (score >= 75 && score <= 89) {
+    getMetacriticText = "Generally favorable";
+  } else if (score >= 50 && score <= 74) {
+    getMetacriticText = "Mixed or average";
+  } else if (score >= 20 && score <= 49) {
+    getMetacriticText = "Generally unfavorable";
+  } else if (score >= 0 && score <= 19) {
+    getMetacriticText = "Overwhelming dislike";
+  } else {
+    getMetacriticText = "No Metacritic score available";
+  }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -26,52 +65,118 @@ export default function GameScreen() {
         >
           <Icons name="arrow-circle-o-left" style={styles.backIcon} />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setIsFavorite(!isFavorite)}
-          style={styles.iconContainer}
-        >
-          <Icons
-            name="heart"
-            style={styles.heartIcon}
-            color={isFavorite ? "#FF4D4D" : "#fff"}
-          />
-        </TouchableOpacity>
       </SafeAreaView>
-      <View>
-        <Image
-          source={require("../assets/images/GodOfWarInfo.jpg")}
-          style={styles.backgroundImage}
-        />
-        <LinearGradient
-          colors={["transparent", "rgba(23,23,23,0.8)", "rgba(23,23,23,1)"]}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
-          style={styles.imageGradient}
-        />
-      </View>
-      <Text style={styles.title}>{gameName}</Text>
-      <View style={styles.gameContentContainer}>
-        <Text style={styles.text}>Developer</Text>
-        <Text style={styles.text}>Publisher</Text>
-        <Text style={styles.text}>Released</Text>
-        <Text style={styles.gameDescription}>
-          this is the general game info hehe god
-        </Text>
-
-        <Text style={styles.subtitle}>Tags</Text>
-        <View style={styles.tagsContainer}>
-          <Text style={styles.text}>category 1</Text>
-          <Text style={styles.text}>category 2</Text>
-          <Text style={styles.text}>category 3</Text>
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <Loading />
         </View>
-
-        <Text style={styles.subtitle}>Reviews all time</Text>
-        <Text style={styles.text}>positive</Text>
-
-        <Text style={styles.subtitle}>Where to buy?</Text>
-        <Text style={styles.text}>You can get this game on steam</Text>
-        <Text style={styles.lastText}>Price</Text>
-      </View>
+      ) : (
+        <View>
+          <View>
+            <Image
+              source={{ uri: game.background_image_additional }}
+              style={styles.backgroundImage}
+            />
+            <LinearGradient
+              colors={["transparent", "rgba(23,23,23,0.8)", "rgba(23,23,23,1)"]}
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+              style={styles.imageGradient}
+            />
+          </View>
+          <Text style={styles.title}>{game.name}</Text>
+          <View style={styles.gameContentContainer}>
+            <Text style={[styles.subtitle, { marginTop: 10 }]}>Developers</Text>
+            <View style={styles.gameInfoContainer}>
+              <FlatList
+                horizontal
+                data={game.developers}
+                keyExtractor={(item, index) => index.toString()}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <React.Fragment>
+                    <Text style={styles.text}>{item.name}</Text>
+                    {index < game.developers.length - 1 && (
+                      <Text style={styles.text}> | </Text>
+                    )}
+                  </React.Fragment>
+                )}
+              />
+            </View>
+            <Text style={styles.subtitle}>Publishers</Text>
+            <View style={styles.gameInfoContainer}>
+              <FlatList
+                horizontal
+                data={game.publishers}
+                keyExtractor={(item, index) => index.toString()}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <React.Fragment>
+                    <Text style={styles.text}>{item.name}</Text>
+                    {index < game.publishers.length - 1 && (
+                      <Text style={styles.text}> | </Text>
+                    )}
+                  </React.Fragment>
+                )}
+              />
+            </View>
+            <Text style={styles.subtitle}>Release Date</Text>
+            <View style={styles.gameInfoContainer}>
+              <Text style={styles.text}>{game.released}</Text>
+            </View>
+            <Text style={styles.subtitle}>Description</Text>
+            <View style={styles.gameInfoContainer}>
+              <Text style={[styles.text, { textAlign: "justify" }]}>
+                {game.description
+                  .replace(/<\/?p>/g, "")
+                  .replace(/<br \/>/g, "")
+                  .replace(/- /g, "")
+                  .replace(/&#39;/g, "")}
+              </Text>
+            </View>
+            <Text style={styles.subtitle}>Genres</Text>
+            <View style={styles.gameInfoContainer}>
+              <FlatList
+                horizontal
+                data={game.genres}
+                keyExtractor={(item, index) => index.toString()}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <React.Fragment>
+                    <Text style={styles.text}>{item.name}</Text>
+                    {index < game.genres.length - 1 && (
+                      <Text style={styles.text}> | </Text>
+                    )}
+                  </React.Fragment>
+                )}
+              />
+            </View>
+            <Text style={styles.subtitle}>Reviews (Metacritic)</Text>
+            <View style={styles.gameInfoContainer}>
+              <Text style={styles.text}>
+                {game.metacritic} {getMetacriticText}
+              </Text>
+            </View>
+            <Text style={styles.subtitle}>Platforms</Text>
+            <View style={styles.gameInfoContainer}>
+              <FlatList
+                horizontal
+                data={game.parent_platforms}
+                keyExtractor={(item, index) => index.toString()}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <React.Fragment>
+                    <Text style={styles.text}>{item.platform.name}</Text>
+                    {index < game.parent_platforms.length - 1 && (
+                      <Text style={styles.text}> | </Text>
+                    )}
+                  </React.Fragment>
+                )}
+              />
+            </View>
+          </View>
+        </View>
+      )}
     </ScrollView>
   );
 }

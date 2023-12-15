@@ -29,10 +29,7 @@ export const styles = StyleSheet.create({
   },
   backIcon: {
     color: "#FF4D4D",
-    fontSize: 30,
-  },
-  heartIcon: {
-    fontSize: 30,
+    fontSize: 50,
   },
   backgroundImage: {
     width: width,
@@ -52,7 +49,7 @@ export const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     letterSpacing: 2,
-    marginTop: -(height * 0.09),
+    marginTop: -(height * 0.13),
     marginBottom: 50,
   },
   gameContentContainer: {
@@ -65,26 +62,19 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     letterSpacing: 2,
-    marginTop: 40,
+    marginBottom: 10,
   },
   text: {
     color: "#fff",
     fontSize: 20,
   },
-  gameDescription: {
-    color: "#fff",
-    fontSize: 20,
-    marginTop: 40,
-  },
-  lastText: {
-    color: "#fff",
-    fontSize: 20,
-    marginBottom: 40,
+
+  gameInfoContainer: {
+    flexDirection: "row",
+    marginBottom: 42,
   },
 
-  //tags container
-  tagsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+  loadingContainer: {
+    paddingTop: 350,
   },
 });

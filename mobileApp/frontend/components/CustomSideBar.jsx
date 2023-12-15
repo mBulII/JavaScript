@@ -95,6 +95,7 @@ export default function SideBar({ user, handleLogout }) {
         name="Home"
         component={Home}
         options={{
+          swipeEdgeWidth: 0,
           drawerIcon: ({ color }) => (
             <Icons name="home" size={22} color={color} style={{ width: 25 }} />
           ),
