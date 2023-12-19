@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiKey = "b59b6be1ce034ea39cfbeb911cf683d7";
+const apiKey = "apikey";
 
 const topGamesCurrentYear = `https://api.rawg.io/api/games?key=${apiKey}&dates=2023-01-01,2023-12-13&ordering=-rating`;
 const mostAnticipated = `https://api.rawg.io/api/games?key=${apiKey}&dates=2023-12-30,2024-12-30&ordering=-added`;
